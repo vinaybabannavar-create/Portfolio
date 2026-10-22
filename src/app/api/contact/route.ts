@@ -45,9 +45,11 @@ export async function POST(req: NextRequest) {
         },
       });
 
+      const recipient = process.env.CONTACT_RECEIVER || "vinaybabannavar@gmail.com";
+
       return transporter.sendMail({
         from: `"Portfolio Contact" <${userToTry}>`,
-        to: userToTry,
+        to: recipient,
         replyTo: email,
         subject: `[Portfolio Inquiry] ${subject} — ${name}`,
         html: `

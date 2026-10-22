@@ -15,10 +15,17 @@ export async function POST(req: NextRequest) {
     const gmailUser = process.env.GMAIL_USER;
     const gmailPass = process.env.GMAIL_APP_PASSWORD;
 
-    if (!gmailUser || !gmailPass) {
-      // Env vars not set — degrade gracefully with a 503
+    const isPlaceholderOrMissing =
+      !gmailPass ||
+      gmailPass === "your-16-char-app-password-here" ||
+      gmailPass.trim().length < 16;
+
+    if (!gmailUser || isPlaceholderOrMissing) {
       return NextResponse.json(
-        { error: "Email service not configured. Please contact vinaybabannavar@gmail.com directly." },
+        {
+          error: "Gmail App Password not yet configured in .env.local.",
+          needsConfig: true,
+        },
         { status: 503 }
       );
     }

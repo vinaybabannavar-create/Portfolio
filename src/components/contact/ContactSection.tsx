@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Mail, Copy, Check, ArrowUpRight, FileDown, Send, MessageSquare, Phone, MapPin } from "lucide-react";
+import { Mail, Copy, Check, ArrowUpRight, FileDown, Send, MessageSquare, Phone, MapPin, ExternalLink } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "@/components/ui/Icons";
 import { DEVELOPER_INFO } from "@/data/portfolio-data";
 
@@ -15,6 +15,15 @@ export default function ContactSection() {
     navigator.clipboard.writeText(DEVELOPER_INFO.email);
     setCopied(true);
     setTimeout(() => setCopied(false), 2500);
+  };
+
+  const triggerMailto = () => {
+    const mailtoUrl = `mailto:${DEVELOPER_INFO.email}?subject=${encodeURIComponent(
+      `[Portfolio Inquiry] ${formData.subject} - ${formData.name}`
+    )}&body=${encodeURIComponent(
+      `Name: ${formData.name}\nEmail: ${formData.email}\nSubject: ${formData.subject}\n\nMessage:\n${formData.message}`
+    )}`;
+    window.location.href = mailtoUrl;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -255,8 +264,37 @@ export default function ContactSection() {
               )}
 
               {status === "error" && (
-                <div className="p-4 rounded-lg bg-red-500/10 border border-red-500/30 font-mono text-xs text-red-400 text-center">
-                  {errorMsg || "Failed to send. Please email vinaybabannavar@gmail.com directly."}
+                <div className="p-5 rounded-xl bg-obsidian border border-amber-accent/40 font-mono text-xs space-y-3">
+                  <div className="text-amber-accent font-semibold flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-amber-accent animate-ping" />
+                    <span>{errorMsg || "Direct SMTP not configured."}</span>
+                  </div>
+                  <p className="font-sans text-xs text-stone leading-relaxed">
+                    To send directly in background, add a 16-character Google App Password in <code className="text-lime-accent bg-obsidian-surface px-1.5 py-0.5 rounded border border-obsidian-border">.env.local</code>. Or dispatch immediately with one click below:
+                  </p>
+                  <div className="flex flex-wrap gap-2.5 pt-1">
+                    <button
+                      type="button"
+                      onClick={triggerMailto}
+                      className="px-3.5 py-2 rounded bg-lime-accent text-obsidian font-bold hover:bg-lime-dim flex items-center gap-1.5 transition-colors text-xs"
+                    >
+                      <ExternalLink className="w-3.5 h-3.5" />
+                      <span>Open in Mail App</span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        navigator.clipboard.writeText(
+                          `To: vinaybabannavar@gmail.com\nSubject: [Portfolio Inquiry] ${formData.subject} - ${formData.name}\n\nName: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
+                        );
+                        alert("Message copied to clipboard!");
+                      }}
+                      className="px-3.5 py-2 rounded border border-obsidian-border bg-obsidian-surface text-ivory hover:border-lime-accent flex items-center gap-1.5 transition-colors text-xs"
+                    >
+                      <Copy className="w-3.5 h-3.5 text-lime-accent" />
+                      <span>Copy Full Message</span>
+                    </button>
+                  </div>
                 </div>
               )}
             </form>

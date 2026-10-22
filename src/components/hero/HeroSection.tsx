@@ -16,7 +16,7 @@ const HeroArtifact = dynamic(() => import("../canvas/HeroArtifact"), {
 
 export default function HeroSection() {
   return (
-    <section className="relative min-h-screen pt-32 sm:pt-40 pb-20 sm:pb-28 flex flex-col justify-between overflow-hidden bg-grid-pattern">
+    <section className="relative min-h-screen pt-20 pb-20 sm:pb-28 flex flex-col justify-between overflow-hidden bg-grid-pattern">
       {/* Cinematic Ambient Glow */}
       <div className="absolute top-1/4 left-1/3 -translate-x-1/2 w-[650px] h-[650px] bg-lime-accent/5 rounded-full blur-[160px] pointer-events-none" />
       <div className="absolute top-1/3 right-1/4 w-[500px] h-[500px] bg-amber-accent/5 rounded-full blur-[180px] pointer-events-none" />

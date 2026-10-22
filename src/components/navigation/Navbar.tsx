@@ -30,10 +30,10 @@ export default function Navbar() {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 border-b ${
           isScrolled
-            ? "bg-obsidian/95 backdrop-blur-xl border-b border-obsidian-border py-3 shadow-2xl shadow-black/40"
-            : "bg-obsidian/80 backdrop-blur-md py-5 border-b border-obsidian-border/40"
+            ? "bg-obsidian/96 backdrop-blur-xl border-obsidian-border py-3 shadow-2xl shadow-black/50"
+            : "bg-[#0B0C0A]/85 backdrop-blur-md border-obsidian-border/50 py-4"
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">

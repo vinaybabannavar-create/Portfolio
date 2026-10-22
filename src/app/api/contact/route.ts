@@ -83,15 +83,33 @@ export async function POST(req: NextRequest) {
       });
     };
 
-    try {
-      await sendWithUser(gmailUser);
-    } catch (primaryErr: any) {
-      if (primaryErr?.code === "EAUTH") {
-        console.warn(`[Contact API] Auth failed for ${gmailUser}, retrying with ${alternateUser}...`);
-        await sendWithUser(alternateUser);
-      } else {
-        throw primaryErr;
+    const candidateUsers = Array.from(
+      new Set([
+        gmailUser,
+        "vinaybabannavar70@gmail.com",
+        "vinaybabannavar07@gmail.com",
+        "vinaybabannavar@gmail.com",
+      ])
+    );
+
+    let sent = false;
+    let lastError: any = null;
+
+    for (const userToTry of candidateUsers) {
+      try {
+        await sendWithUser(userToTry);
+        sent = true;
+        break;
+      } catch (err: any) {
+        lastError = err;
+        if (err?.code !== "EAUTH") {
+          throw err;
+        }
       }
+    }
+
+    if (!sent && lastError) {
+      throw lastError;
     }
 
     return NextResponse.json({ success: true, message: "Message transmitted successfully." });

@@ -8,7 +8,8 @@ import { DEVELOPER_INFO } from "@/data/portfolio-data";
 export default function ContactSection() {
   const [copied, setCopied] = useState(false);
   const [formData, setFormData] = useState({ name: "", email: "", message: "", subject: "Engineering Inquiry" });
-  const [status, setStatus] = useState<"idle" | "ready" | "dispatched">("idle");
+  const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+  const [errorMsg, setErrorMsg] = useState("");
 
   const handleCopyEmail = () => {
     navigator.clipboard.writeText(DEVELOPER_INFO.email);
@@ -16,21 +17,33 @@ export default function ContactSection() {
     setTimeout(() => setCopied(false), 2500);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.name || !formData.email || !formData.message) {
-      alert("Please complete all required fields before dispatching.");
-      return;
+    if (!formData.name || !formData.email || !formData.message) return;
+
+    setStatus("sending");
+    setErrorMsg("");
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        setStatus("success");
+        setFormData({ name: "", email: "", message: "", subject: "Engineering Inquiry" });
+      } else {
+        setStatus("error");
+        setErrorMsg(data.error || "Something went wrong. Please try again.");
+      }
+    } catch {
+      setStatus("error");
+      setErrorMsg("Network error. Please try again or email directly.");
     }
-
-    const mailtoUrl = `mailto:${DEVELOPER_INFO.email}?subject=${encodeURIComponent(
-      `[Portfolio Inquiry] ${formData.subject} - ${formData.name}`
-    )}&body=${encodeURIComponent(
-      `Name: ${formData.name}\nEmail: ${formData.email}\nSubject: ${formData.subject}\n\nMessage:\n${formData.message}`
-    )}`;
-
-    window.location.href = mailtoUrl;
-    setStatus("dispatched");
   };
 
   return (
@@ -211,15 +224,39 @@ export default function ContactSection() {
 
               <button
                 type="submit"
-                className="w-full py-4 rounded-lg bg-lime-accent text-obsidian font-mono text-xs sm:text-sm font-bold uppercase tracking-wider hover:bg-lime-dim transition-colors flex items-center justify-center gap-2 shadow-lg shadow-lime-accent/15"
+                disabled={status === "sending"}
+                className={`w-full py-4 rounded-lg font-mono text-xs sm:text-sm font-bold uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg transition-all duration-200 ${
+                  status === "sending"
+                    ? "bg-lime-accent/60 text-obsidian cursor-not-allowed"
+                    : "bg-lime-accent text-obsidian hover:bg-lime-dim shadow-lime-accent/15"
+                }`}
               >
-                <Send className="w-4 h-4" />
-                <span>Transmit Message Directly to Vinay</span>
+                {status === "sending" ? (
+                  <>
+                    <svg className="w-4 h-4 animate-spin" viewBox="0 0 24 24" fill="none">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z" />
+                    </svg>
+                    <span>Transmitting...</span>
+                  </>
+                ) : (
+                  <>
+                    <Send className="w-4 h-4" />
+                    <span>Transmit Message Directly to Vinay</span>
+                  </>
+                )}
               </button>
 
-              {status === "dispatched" && (
-                <div className="p-4 rounded-lg bg-lime-accent/10 border border-lime-accent/30 font-mono text-xs text-lime-accent text-center font-semibold">
-                  Email client triggered with pre-filled parameters. I look forward to connecting!
+              {status === "success" && (
+                <div className="p-4 rounded-lg bg-lime-accent/10 border border-lime-accent/40 font-mono text-xs text-lime-accent text-center font-semibold flex items-center justify-center gap-2">
+                  <Check className="w-4 h-4" />
+                  Message transmitted successfully — I&apos;ll respond within 24 hours!
+                </div>
+              )}
+
+              {status === "error" && (
+                <div className="p-4 rounded-lg bg-red-500/10 border border-red-500/30 font-mono text-xs text-red-400 text-center">
+                  {errorMsg || "Failed to send. Please email vinaybabannavar@gmail.com directly."}
                 </div>
               )}
             </form>

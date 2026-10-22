@@ -12,8 +12,9 @@ export default function ProjectGallery() {
 
   const categories = ["All", "Agentic AI", "Full-Stack", "Enterprise Systems", "DevOps & Cloud"];
 
-  const flagshipProject = FEATURED_PROJECTS[0]; // Jenkins Self-Healing Agent
-  const secondaryFeatured = FEATURED_PROJECTS.slice(1);
+  // NEXORA is the flagship first — find by id, rest are secondary
+  const flagshipProject = FEATURED_PROJECTS.find((p) => p.id === "nexora-enterprise-platform") ?? FEATURED_PROJECTS[0];
+  const secondaryFeatured = FEATURED_PROJECTS.filter((p) => p.id !== flagshipProject.id);
 
   const filteredSecondary = activeCategory === "All"
     ? secondaryFeatured
@@ -52,9 +53,9 @@ export default function ProjectGallery() {
       </div>
 
       {/* =========================================================================
-          FLAGSHIP PROJECT SHOWCASE: JENKINS SELF-HEALING AGENT
+          FLAGSHIP PROJECT SHOWCASE: NEXORA — AI ENTERPRISE OPERATIONS PLATFORM
           ========================================================================= */}
-      {(activeCategory === "All" || activeCategory === "DevOps & Cloud") && (
+      {(activeCategory === "All" || activeCategory === "Enterprise Systems") && (
         <div className="mb-24">
           <div className="border-2 border-lime-accent/40 rounded-2xl bg-obsidian-surface/90 overflow-hidden shadow-2xl p-8 sm:p-12 lg:p-16 relative">
             
@@ -62,7 +63,7 @@ export default function ProjectGallery() {
             <div className="flex flex-wrap items-center justify-between gap-4 border-b border-obsidian-border pb-6 mb-8">
               <div className="flex items-center gap-3">
                 <span className="px-3 py-1 rounded bg-lime-accent text-obsidian font-mono text-xs font-bold uppercase tracking-wider">
-                  FLAGSHIP ENGINEERING BUILD // 01
+                  FLAGSHIP BUILD // 01
                 </span>
                 <span className="font-mono text-xs text-stone-dark uppercase">
                   {flagshipProject.category}
@@ -130,104 +131,99 @@ export default function ProjectGallery() {
                   ))}
                 </div>
 
-                {/* Flagship CTAs */}
-                <div className="flex flex-wrap items-center gap-4 pt-6">
-                  <button
-                    onClick={() => setSelectedProject(flagshipProject)}
-                    className="px-6 py-3.5 rounded bg-lime-accent text-obsidian font-mono text-xs sm:text-sm font-bold uppercase tracking-wider hover:bg-lime-dim transition-colors flex items-center gap-2 shadow-lg shadow-lime-accent/15"
-                  >
-                    <span>Inspect Agent Case Study</span>
-                    <ArrowUpRight className="w-4 h-4" />
-                  </button>
+                  {/* Flagship CTAs */}
+                  <div className="flex flex-wrap items-center gap-4 pt-6">
+                    <button
+                      onClick={() => setSelectedProject(flagshipProject)}
+                      className="px-6 py-3.5 rounded bg-lime-accent text-obsidian font-mono text-xs sm:text-sm font-bold uppercase tracking-wider hover:bg-lime-dim transition-colors flex items-center gap-2 shadow-lg shadow-lime-accent/15"
+                    >
+                      <span>Deep Dive Case Study</span>
+                      <ArrowUpRight className="w-4 h-4" />
+                    </button>
 
-                  <a
-                    href={flagshipProject.githubUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="px-6 py-3.5 rounded border border-obsidian-border bg-obsidian-card text-ivory hover:border-lime-accent hover:text-lime-accent font-mono text-xs sm:text-sm font-semibold flex items-center gap-2 transition-colors"
-                  >
-                    <GithubIcon className="w-4 h-4 text-lime-accent" />
-                    <span>View Repository</span>
-                  </a>
-                </div>
+                    <a
+                      href={flagshipProject.githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-6 py-3.5 rounded border border-obsidian-border bg-obsidian-card text-ivory hover:border-lime-accent hover:text-lime-accent font-mono text-xs sm:text-sm font-semibold flex items-center gap-2 transition-colors"
+                    >
+                      <GithubIcon className="w-4 h-4 text-lime-accent" />
+                      <span>View Repository</span>
+                    </a>
+                  </div>
               </div>
 
-              {/* Right Column: Distinctive Architecture Workflow Graphic */}
+              {/* Right Column: NEXORA Microservices Architecture */}
               <div className="lg:col-span-5">
                 <div className="border border-obsidian-border rounded-xl bg-obsidian p-6 space-y-4">
                   <div className="flex items-center justify-between pb-3 border-b border-obsidian-border font-mono text-xs text-stone">
                     <span className="flex items-center gap-2 text-lime-accent">
                       <Terminal className="w-4 h-4" />
-                      <span>AUTONOMOUS_DIAGNOSTIC_FLOW</span>
+                      <span>SYSTEM_GRAPH</span>
                     </span>
-                    <span className="text-stone-dark">5 NODES</span>
+                    <span className="text-stone-dark">DIAGRAM // 05</span>
                   </div>
 
-                  {/* Flow Steps with Clear Visual Connectors */}
+                  {/* NEXORA Architecture Flow */}
                   <div className="space-y-3 font-mono text-xs">
-                    <div className="p-3.5 rounded bg-obsidian-card border border-red-500/40 text-red-400">
-                      <div className="flex justify-between items-center mb-1">
-                        <span className="font-bold">01 // FAILURE INTERCEPT</span>
-                        <span className="text-[10px] text-stone">WEBHOOK</span>
-                      </div>
-                      <p className="font-sans text-xs text-stone">
-                        Intercepts failed build #104 &amp; opens sliding-window log stream.
-                      </p>
-                    </div>
-
-                    <div className="text-center text-stone-dark text-xs flex items-center justify-center gap-2">
-                      <span className="w-px h-3 bg-obsidian-border" />
-                    </div>
-
+                    {/* Client Layer */}
                     <div className="p-3.5 rounded bg-obsidian-card border border-obsidian-border text-ivory">
                       <div className="flex justify-between items-center mb-1">
-                        <span className="font-bold">02 // AST LOG PARSER</span>
-                        <span className="text-[10px] text-stone">HEURISTIC</span>
+                        <span className="font-bold">01 // NEXT.JS CLIENT</span>
+                        <span className="text-[10px] text-stone">SSR + OPTIMISTIC UI</span>
                       </div>
                       <p className="font-sans text-xs text-stone">
-                        Isolates compilation stack trace from 14,000+ lines of raw console noise.
+                        Role-aware frontend with live kanban boards and notification feeds.
                       </p>
                     </div>
 
-                    <div className="text-center text-stone-dark text-xs flex items-center justify-center gap-2">
+                    <div className="text-center flex items-center justify-center gap-2">
                       <span className="w-px h-3 bg-obsidian-border" />
                     </div>
 
+                    {/* Auth + RBAC */}
                     <div className="p-3.5 rounded bg-obsidian-card border border-amber-accent/40 text-amber-accent">
                       <div className="flex justify-between items-center mb-1">
-                        <span className="font-bold">03 // ROOT-CAUSE CLASSIFIER</span>
-                        <span className="text-[10px] text-stone">LLM REASONING</span>
+                        <span className="font-bold">02 // JWT / RBAC GUARD</span>
+                        <span className="text-[10px] text-stone">4 PERMISSION TIERS</span>
                       </div>
                       <p className="font-sans text-xs text-stone">
-                        Classifies: Missing native dependency &apos;libpq-dev&apos; in Alpine layer.
+                        Granular role enforcement across employee, manager, admin and super-admin.
                       </p>
                     </div>
 
-                    <div className="text-center text-stone-dark text-xs flex items-center justify-center gap-2">
+                    <div className="text-center flex items-center justify-center gap-2">
                       <span className="w-px h-3 bg-obsidian-border" />
                     </div>
 
-                    <div className="p-3.5 rounded bg-obsidian-card border border-obsidian-border text-ivory">
-                      <div className="flex justify-between items-center mb-1">
-                        <span className="font-bold">04 // PATCH SYNTHESIS</span>
-                        <span className="text-[10px] text-stone">REMEDIATION</span>
+                    {/* Core Django + Redis */}
+                    <div className="grid grid-cols-2 gap-2">
+                      <div className="p-3 rounded bg-obsidian-card border border-obsidian-border text-ivory">
+                        <div className="font-bold text-[11px] mb-1">03 // DJANGO CORE</div>
+                        <p className="font-sans text-[11px] text-stone leading-snug">
+                          CRM, tickets, tasks — PostgreSQL ACID
+                        </p>
                       </div>
-                      <p className="font-sans text-xs text-stone">
-                        Generates configuration diff adding required package header.
-                      </p>
+                      <div className="p-3 rounded bg-obsidian-card border border-lime-accent/40 text-lime-accent">
+                        <div className="font-bold text-[11px] mb-1">04 // REDIS PUB/SUB</div>
+                        <p className="font-sans text-[11px] text-stone leading-snug">
+                          Socket.IO live board sync to all teams
+                        </p>
+                      </div>
                     </div>
 
-                    <div className="text-center text-stone-dark text-xs flex items-center justify-center gap-2">
+                    <div className="text-center flex items-center justify-center gap-2">
                       <span className="w-px h-3 bg-obsidian-border" />
                     </div>
 
+                    {/* FastAPI RAG */}
                     <div className="p-3.5 rounded bg-obsidian-card border border-lime-accent/50 text-lime-accent">
                       <div className="flex justify-between items-center mb-1">
-                        <span className="font-bold">05 // RE-DISPATCH &amp; VERIFY</span>
-                        <span className="text-[10px] text-lime-accent font-bold">42s END-TO-END</span>
+                        <span className="font-bold">05 // FASTAPI RAG WORKER</span>
+                        <span className="text-[10px] text-lime-accent font-bold">GEMINI AI</span>
                       </div>
                       <p className="font-sans text-xs text-stone">
-                        Build #105 retry dispatches &amp; succeeds with zero human delay.
+                        Async document indexing & semantic enterprise search — decoupled from core.
                       </p>
                     </div>
                   </div>
@@ -237,7 +233,7 @@ export default function ProjectGallery() {
                       onClick={() => setSelectedProject(flagshipProject)}
                       className="font-mono text-xs text-stone hover:text-lime-accent transition-colors"
                     >
-                      [Click to view full architecture specifications]
+                      [Click to expand full architecture case study]
                     </button>
                   </div>
                 </div>

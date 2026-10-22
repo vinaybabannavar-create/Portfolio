@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { ExternalLink, GitBranch, Terminal, ArrowUpRight, FolderGit2 } from "lucide-react";
+import { ExternalLink, ArrowUpRight, FolderGit2 } from "lucide-react";
 import { GithubIcon } from "@/components/ui/Icons";
 import { DEVELOPER_INFO } from "@/data/portfolio-data";
 
@@ -68,16 +68,16 @@ export default function GithubSection() {
   ];
 
   return (
-    <section className="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-32 sm:py-40 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
       {/* Header */}
-      <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6 border-b border-obsidian-border pb-8">
+      <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6 border-b border-obsidian-border pb-10">
         <div>
-          <div className="flex items-center gap-2 font-mono text-xs text-lime-accent uppercase tracking-widest mb-2 font-semibold">
-            <GithubIcon className="w-4 h-4" />
+          <div className="flex items-center gap-2 font-mono text-xs text-lime-accent uppercase tracking-widest mb-3 font-semibold">
+            <GithubIcon className="w-4 h-4 text-lime-accent" />
             <span>[SOURCE_TELEMETRY // GITHUB]</span>
           </div>
-          <h2 className="font-sans text-3xl sm:text-5xl font-bold text-ivory tracking-tight">
+          <h2 className="font-sans text-4xl sm:text-6xl font-black text-ivory tracking-tight">
             Codebase &amp; Open Source
           </h2>
         </div>
@@ -86,7 +86,7 @@ export default function GithubSection() {
           href={DEVELOPER_INFO.github}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center gap-2 px-4 py-2 rounded bg-obsidian-surface border border-obsidian-border text-ivory hover:border-lime-accent hover:text-lime-accent font-mono text-xs transition-colors"
+          className="flex items-center gap-2 px-5 py-2.5 rounded-lg bg-obsidian-surface border border-obsidian-border text-ivory hover:border-lime-accent hover:text-lime-accent font-mono text-xs sm:text-sm font-semibold transition-colors"
         >
           <GithubIcon className="w-4 h-4 text-lime-accent" />
           <span>github.com/vinaybabannavar-create</span>
@@ -94,16 +94,16 @@ export default function GithubSection() {
         </a>
       </div>
 
-      {/* Grid of Verified Repositories */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      {/* Grid of Repositories */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {verifiedRepositories.map((repo) => (
           <div
             key={repo.name}
-            className="p-5 rounded-lg border border-obsidian-border bg-obsidian-surface/60 hover:border-lime-accent/50 transition-all duration-200 flex flex-col justify-between group"
+            className="p-6 rounded-2xl border border-obsidian-border bg-obsidian-surface/60 hover:border-lime-accent/50 transition-all duration-200 flex flex-col justify-between group shadow-md"
           >
             <div>
-              <div className="flex items-center justify-between mb-3">
-                <span className="font-mono text-[10px] text-lime-accent bg-lime-accent/10 px-2 py-0.5 rounded border border-lime-accent/20">
+              <div className="flex items-center justify-between mb-4">
+                <span className="font-mono text-xs text-lime-accent bg-lime-accent/10 px-2.5 py-0.5 rounded border border-lime-accent/20 font-semibold">
                   {repo.lang}
                 </span>
                 <FolderGit2 className="w-4 h-4 text-stone-dark group-hover:text-lime-accent transition-colors" />
@@ -112,15 +112,15 @@ export default function GithubSection() {
               <h4 className="font-mono font-bold text-sm text-ivory mb-2 group-hover:text-lime-accent transition-colors break-words">
                 {repo.name}
               </h4>
-              <p className="font-sans text-xs text-stone leading-relaxed mb-4">
+              <p className="font-sans text-xs sm:text-sm text-stone leading-relaxed mb-6">
                 {repo.desc}
               </p>
 
-              <div className="flex flex-wrap gap-1 mb-4">
+              <div className="flex flex-wrap gap-1.5 mb-6">
                 {repo.topics.slice(0, 3).map((topic) => (
                   <span
                     key={topic}
-                    className="font-mono text-[10px] text-stone-dark bg-obsidian-card px-1.5 py-0.5 rounded border border-obsidian-border/50"
+                    className="font-mono text-[11px] text-stone-dark bg-obsidian-card px-2 py-0.5 rounded border border-obsidian-border/50"
                   >
                     #{topic}
                   </span>
@@ -128,14 +128,14 @@ export default function GithubSection() {
               </div>
             </div>
 
-            <div className="pt-3 border-t border-obsidian-border/60 flex items-center justify-between font-mono text-xs">
+            <div className="pt-4 border-t border-obsidian-border/60 flex items-center justify-between font-mono text-xs">
               <a
                 href={repo.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-stone hover:text-ivory flex items-center gap-1 transition-colors"
+                className="text-stone hover:text-ivory flex items-center gap-1 transition-colors font-semibold"
               >
-                <span>Code</span>
+                <span>Code Repository</span>
                 <ArrowUpRight className="w-3 h-3" />
               </a>
 
@@ -144,9 +144,9 @@ export default function GithubSection() {
                   href={repo.deploy}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-lime-accent hover:underline flex items-center gap-1"
+                  className="text-lime-accent hover:underline flex items-center gap-1 font-semibold"
                 >
-                  <span>Demo</span>
+                  <span>Live Demo</span>
                   <ExternalLink className="w-3 h-3" />
                 </a>
               )}
@@ -156,15 +156,15 @@ export default function GithubSection() {
       </div>
 
       {/* Footer Explore Note */}
-      <div className="mt-8 text-center">
+      <div className="mt-12 text-center">
         <a
           href={`${DEVELOPER_INFO.github}?tab=repositories`}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 font-mono text-xs text-stone hover:text-lime-accent transition-colors"
+          className="inline-flex items-center gap-2 font-mono text-xs sm:text-sm text-stone hover:text-lime-accent transition-colors font-bold uppercase tracking-wider"
         >
           <span>EXPLORE ALL 34 PUBLIC REPOSITORIES ON GITHUB</span>
-          <ArrowUpRight className="w-3.5 h-3.5" />
+          <ArrowUpRight className="w-4 h-4" />
         </a>
       </div>
 

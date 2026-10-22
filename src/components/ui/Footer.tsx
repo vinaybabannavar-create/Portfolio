@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import { ArrowUp, FileDown } from "lucide-react";
 import { DEVELOPER_INFO } from "@/data/portfolio-data";
 
@@ -9,31 +10,32 @@ export default function Footer() {
   };
 
   return (
-    <footer className="border-t border-obsidian-border bg-obsidian py-12 relative overflow-hidden">
+    <footer className="border-t border-obsidian-border bg-obsidian py-16 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Main Footer Row */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-8 pb-10 border-b border-obsidian-border">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-10 pb-12 border-b border-obsidian-border">
           
           {/* Brand & Tagline */}
-          <div className="space-y-2">
+          <div className="space-y-3">
             <div className="flex items-center gap-3">
-              <div className="w-7 h-7 rounded border border-obsidian-border bg-obsidian-surface flex items-center justify-center font-mono text-xs font-bold text-lime-accent">
+              <div className="w-8 h-8 rounded border border-obsidian-border bg-obsidian-surface flex items-center justify-center font-mono text-xs font-bold text-lime-accent shadow-sm">
                 VB
               </div>
-              <span className="font-mono text-sm font-bold text-ivory tracking-wider">
+              <span className="font-mono text-base font-bold text-ivory tracking-wider">
                 VINAY BABANNAVAR
               </span>
             </div>
-            <p className="font-sans text-xs text-stone max-w-sm">
-              Engineering intelligent systems. Crafting digital experiences.
+            <p className="font-sans text-sm text-stone max-w-md leading-relaxed">
+              Engineering intelligent systems. Crafting digital experiences. Final-year Computer Science Engineering student &bull; Bengaluru, India.
             </p>
           </div>
 
-          {/* Direct Quick Links */}
-          <div className="flex flex-wrap items-center gap-6 font-mono text-xs text-stone">
+          {/* Quick Links */}
+          <div className="flex flex-wrap items-center gap-6 font-mono text-xs sm:text-sm text-stone">
             <a href="#work" className="hover:text-lime-accent transition-colors">Work</a>
             <a href="#architecture" className="hover:text-lime-accent transition-colors">Architecture</a>
+            <a href="#about" className="hover:text-lime-accent transition-colors">About</a>
             <a href="#research" className="hover:text-lime-accent transition-colors">Research</a>
             <a href="#skills" className="hover:text-lime-accent transition-colors">Capabilities</a>
             <a href="#experience" className="hover:text-lime-accent transition-colors">Experience</a>
@@ -41,36 +43,37 @@ export default function Footer() {
             <a
               href={DEVELOPER_INFO.resumePdf}
               download="Vinay_Babannavar_Resume.pdf"
-              className="text-ivory hover:text-lime-accent transition-colors flex items-center gap-1"
+              className="text-ivory hover:text-lime-accent transition-colors flex items-center gap-1.5 font-bold"
             >
-              <FileDown className="w-3.5 h-3.5 text-lime-accent" />
+              <FileDown className="w-4 h-4 text-lime-accent" />
               <span>Resume PDF</span>
             </a>
           </div>
 
-          {/* Back to top */}
+          {/* Back to top button */}
           <div>
             <button
               onClick={scrollToTop}
-              className="p-3 rounded border border-obsidian-border bg-obsidian-surface hover:border-lime-accent text-stone hover:text-ivory transition-colors"
+              className="p-3.5 rounded-lg border border-obsidian-border bg-obsidian-surface hover:border-lime-accent text-stone hover:text-ivory transition-colors flex items-center gap-2 font-mono text-xs"
               aria-label="Scroll back to top"
             >
-              <ArrowUp className="w-4 h-4" />
+              <span>TOP</span>
+              <ArrowUp className="w-4 h-4 text-lime-accent" />
             </button>
           </div>
 
         </div>
 
         {/* Telemetry & Copyright Bar */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-[11px] text-stone-dark">
+        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-xs text-stone-dark">
           <div className="flex items-center gap-4">
             <span>BENGALURU, INDIA // 12.9716° N, 77.5946° E</span>
-            <span>•</span>
-            <span className="text-lime-accent/80">SYSTEMS IN MOTION</span>
+            <span>&bull;</span>
+            <span className="text-lime-accent/90 font-semibold">SYSTEMS IN MOTION</span>
           </div>
 
           <div className="text-right">
-            <span>© {new Date().getFullYear()} VINAY BABANNAVAR. ALL RIGHTS RESERVED.</span>
+            <span>&copy; {new Date().getFullYear()} VINAY BABANNAVAR. ALL RIGHTS RESERVED.</span>
           </div>
         </div>
 

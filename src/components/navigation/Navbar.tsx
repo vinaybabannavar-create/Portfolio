@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { Menu, X, ArrowUpRight, FileDown, Terminal } from "lucide-react";
+import { Menu, X, ArrowUpRight, FileDown } from "lucide-react";
 import { DEVELOPER_INFO } from "@/data/portfolio-data";
 
 export default function Navbar() {
@@ -20,6 +20,7 @@ export default function Navbar() {
   const navLinks = [
     { label: "Selected Work", href: "#work" },
     { label: "Architecture", href: "#architecture" },
+    { label: "About", href: "#about" },
     { label: "Research", href: "#research" },
     { label: "Capabilities", href: "#skills" },
     { label: "Experience", href: "#experience" },
@@ -31,33 +32,33 @@ export default function Navbar() {
       <header
         className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
           isScrolled
-            ? "bg-obsidian/85 backdrop-blur-md border-b border-obsidian-border py-3.5 shadow-2xl"
-            : "bg-transparent py-5"
+            ? "bg-obsidian/90 backdrop-blur-md border-b border-obsidian-border py-4 shadow-2xl"
+            : "bg-transparent py-6"
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
           {/* Brand Wordmark */}
           <Link
             href="/"
-            className="group flex items-center gap-3 focus:outline-none focus:ring-1 focus:ring-lime-accent rounded"
+            className="group flex items-center gap-3.5 focus:outline-none focus:ring-1 focus:ring-lime-accent rounded"
           >
-            <div className="w-8 h-8 rounded border border-obsidian-border bg-obsidian-surface flex items-center justify-center font-mono text-xs font-bold text-lime-accent group-hover:border-lime-accent transition-colors">
+            <div className="w-9 h-9 rounded-md border border-obsidian-border bg-obsidian-surface flex items-center justify-center font-mono text-xs font-bold text-lime-accent group-hover:border-lime-accent transition-colors shadow-sm">
               VB
             </div>
             <div className="flex flex-col">
-              <span className="font-mono text-xs font-semibold tracking-wider text-ivory group-hover:text-lime-accent transition-colors">
+              <span className="font-mono text-sm font-bold tracking-wider text-ivory group-hover:text-lime-accent transition-colors">
                 VINAY BABANNAVAR
               </span>
-              <span className="font-mono text-[9px] tracking-widest text-stone uppercase">
-                SYSTEMS IN MOTION // '27
+              <span className="font-mono text-[10px] tracking-widest text-stone uppercase">
+                SYSTEMS IN MOTION // &apos;27
               </span>
             </div>
           </Link>
 
           {/* Availability Pill - Desktop */}
-          <div className="hidden xl:flex items-center gap-2 px-3 py-1 rounded border border-obsidian-border bg-obsidian-surface/60 font-mono text-[11px] text-ivory-dim">
-            <span className="w-1.5 h-1.5 rounded-full bg-lime-accent animate-pulse" />
-            <span>Open to AI & Full-Stack Roles</span>
+          <div className="hidden lg:flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-obsidian-border bg-obsidian-surface/80 font-mono text-xs text-ivory-dim">
+            <span className="w-2 h-2 rounded-full bg-lime-accent animate-pulse" />
+            <span>Open to AI &amp; Full-Stack Roles</span>
           </div>
 
           {/* Desktop Navigation Links */}
@@ -78,26 +79,26 @@ export default function Navbar() {
             <a
               href={DEVELOPER_INFO.resumePdf}
               download="Vinay_Babannavar_Resume.pdf"
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded border border-obsidian-border hover:border-lime-accent bg-obsidian-surface text-ivory hover:text-lime-accent font-mono text-xs transition-all duration-200"
+              className="flex items-center gap-1.5 px-3.5 py-2 rounded border border-obsidian-border hover:border-lime-accent bg-obsidian-surface text-ivory hover:text-lime-accent font-mono text-xs font-semibold transition-all duration-200"
               title="Download Authentic Verified Resume PDF"
             >
-              <FileDown className="w-3.5 h-3.5 text-lime-accent" />
+              <FileDown className="w-4 h-4 text-lime-accent" />
               <span>Resume PDF</span>
             </a>
 
             <a
               href="#contact"
-              className="flex items-center gap-1.5 px-3.5 py-1.5 rounded bg-lime-accent text-obsidian font-mono text-xs font-semibold hover:bg-lime-dim transition-colors"
+              className="flex items-center gap-1.5 px-4 py-2 rounded bg-lime-accent text-obsidian font-mono text-xs font-bold hover:bg-lime-dim transition-colors shadow-md shadow-lime-accent/15"
             >
               <span>Connect</span>
-              <ArrowUpRight className="w-3 h-3" />
+              <ArrowUpRight className="w-3.5 h-3.5" />
             </a>
           </div>
 
           {/* Mobile Menu Trigger */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 rounded border border-obsidian-border text-ivory hover:text-lime-accent hover:border-lime-accent transition-colors focus:outline-none"
+            className="md:hidden p-2.5 rounded border border-obsidian-border text-ivory hover:text-lime-accent hover:border-lime-accent transition-colors focus:outline-none"
             aria-label="Toggle navigation menu"
           >
             {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -107,20 +108,20 @@ export default function Navbar() {
 
       {/* Mobile Drawer Overlay */}
       {mobileMenuOpen && (
-        <div className="fixed inset-0 z-30 bg-obsidian/95 backdrop-blur-xl md:hidden pt-24 px-6 flex flex-col justify-between pb-10 border-b border-obsidian-border">
+        <div className="fixed inset-0 z-30 bg-obsidian/98 backdrop-blur-2xl md:hidden pt-28 px-6 flex flex-col justify-between pb-12 border-b border-obsidian-border">
           <div className="flex flex-col gap-6">
-            <div className="font-mono text-xs text-stone uppercase tracking-widest border-b border-obsidian-border pb-3 flex items-center justify-between">
+            <div className="font-mono text-xs text-stone uppercase tracking-widest border-b border-obsidian-border pb-4 flex items-center justify-between">
               <span>Navigation Matrix</span>
-              <span className="text-lime-accent">BLR // UTC +5:30</span>
+              <span className="text-lime-accent font-semibold">BLR // UTC +5:30</span>
             </div>
 
-            <nav className="flex flex-col gap-4">
+            <nav className="flex flex-col gap-3">
               {navLinks.map((item, idx) => (
                 <a
                   key={item.label}
                   href={item.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className="font-mono text-lg text-ivory hover:text-lime-accent transition-colors flex items-center justify-between group py-1"
+                  className="font-mono text-lg text-ivory hover:text-lime-accent transition-colors flex items-center justify-between group py-2"
                 >
                   <span className="flex items-center gap-3">
                     <span className="font-mono text-xs text-stone-dark group-hover:text-lime-accent">
@@ -138,7 +139,7 @@ export default function Navbar() {
             <a
               href={DEVELOPER_INFO.resumePdf}
               download="Vinay_Babannavar_Resume.pdf"
-              className="flex items-center justify-center gap-2 py-3 rounded border border-obsidian-border bg-obsidian-surface text-ivory font-mono text-xs"
+              className="flex items-center justify-center gap-2 py-3.5 rounded border border-obsidian-border bg-obsidian-surface text-ivory font-mono text-xs font-semibold"
             >
               <FileDown className="w-4 h-4 text-lime-accent" />
               <span>Download Resume PDF</span>
@@ -146,9 +147,9 @@ export default function Navbar() {
             <a
               href="#contact"
               onClick={() => setMobileMenuOpen(false)}
-              className="flex items-center justify-center gap-2 py-3 rounded bg-lime-accent text-obsidian font-mono text-xs font-semibold"
+              className="flex items-center justify-center gap-2 py-3.5 rounded bg-lime-accent text-obsidian font-mono text-xs font-bold"
             >
-              <span>Let's Connect</span>
+              <span>Let&apos;s Connect</span>
               <ArrowUpRight className="w-4 h-4" />
             </a>
           </div>
